@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Http Interceptors &mdash; Angular Guideline 8 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/macadamian_theme.css" type="text/css" />
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Angular Guideline 8 documentation" href="../../index.html"/>
+        <link rel="up" title="HttpClient" href="overview.html"/>
+        <link rel="next" title="Module aliases" href="../module_aliases.html"/>
+        <link rel="prev" title="HttpClient" href="overview.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Angular Guideline
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">    HttpClient</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">    Interceptors</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../module_aliases.html">    Module aliases</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common pitfalls</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pitfalls/async_pipe.html">    Async pipe</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Recommended libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/i18n.html">    I18n</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Angular Guideline</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="overview.html">HttpClient</a> &raquo;</li>
+        
+      <li>Http Interceptors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="http-interceptors">
+<h1>Http Interceptors<a class="headerlink" href="#http-interceptors" title="Permalink to this headline">¶</a></h1>
+<p>The Angular HttpClient supports HTTP interception. You can define request or response interceptors, depending if
+you need:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>to inspect and transform HTTP requests from your application to the server</p></li>
+<li><p>to inspect and transform the server’s responses on their way back to the application.</p></li>
+</ul>
+</div></blockquote>
+<p>The benefit of an interceptor is that it can perform route tasks in a standard way, thus eliminating the need of
+doing this explicitly for each request or response.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The most common use case of interceptors is for request authorizations: a request interceptor can be defined to add
+the authorization header with the corresponding authentication token. A response interceptor could be defined for
+error handling.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In Angular, an interceptor is creates as a class that implements the <code class="docutils literal notranslate"><span class="pre">intercept()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">HttpInterceptor</span></code>
+interface.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The Angular interceptors are services, so you must provide them in the same injector (or a parent injector) that
+provides the HttpClient before the app can use them. As most of the applications provide the HttpClient n the app’s
+root injector, you should provide the interceptors in the <code class="docutils literal notranslate"><span class="pre">AppModule</span></code> as well.
+|
+As you may define multiple interceptors, consider defining a file that gathers all of them into an array.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/* &quot;Barrel&quot; of Http Interceptors */</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">HTTP_INTERCEPTORS</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">NoopInterceptor</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./noop-interceptor&#39;</span><span class="p">;</span>
+
+<span class="cm">/* Http interceptor providers in outside-in order */</span>
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">httpInterceptorProviders</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span> <span class="nx">provide</span><span class="o">:</span> <span class="nx">HTTP_INTERCEPTORS</span><span class="p">,</span> <span class="nx">useClass</span><span class="o">:</span> <span class="nx">NoopInterceptor</span><span class="p">,</span> <span class="nx">multi</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
+<span class="p">];</span>
+</pre></div>
+</div>
+<p>Pay attention to the order of the interceptors: Angular will apply them in the order they are appear in the array.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">multi:</span> <span class="pre">true</span></code> option tells Angular that <code class="docutils literal notranslate"><span class="pre">HTTP_INTERCEPTORS</span></code> is a token for a multiprovider that injects an array of values, rather than a single value.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Request and response instances objects are <em>readonly</em>, therefore if the interceptors must mutate any of it,
+you must clone it, modify and then pass the cloned object to <code class="docutils literal notranslate"><span class="pre">next.handle()</span></code>.</p>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../auth.service&#39;</span><span class="p">;</span>
+
+<span class="kd">@Injectable</span><span class="p">()</span>
+<span class="kr">export</span> <span class="kr">class</span> <span class="nx">AuthInterceptor</span> <span class="kr">implements</span> <span class="nx">HttpInterceptor</span> <span class="p">{</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="kr">private</span> <span class="nx">auth</span>: <span class="kt">AuthService</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="nx">intercept</span><span class="p">(</span><span class="nx">req</span>: <span class="kt">HttpRequest</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">next</span>: <span class="kt">HttpHandler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Get the auth token from the service.</span>
+    <span class="kr">const</span> <span class="nx">authToken</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getAuthorizationToken</span><span class="p">();</span>
+
+    <span class="c1">// Clone the request and replace the original headers with</span>
+    <span class="c1">// cloned headers, updated with the authorization.</span>
+    <span class="kr">const</span> <span class="nx">authReq</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">clone</span><span class="p">({</span>
+      <span class="nx">headers</span>: <span class="kt">req.headers.set</span><span class="p">(</span><span class="s1">&#39;Authorization&#39;</span><span class="p">,</span> <span class="nx">authToken</span><span class="p">)</span>
+    <span class="p">});</span>
+
+    <span class="c1">// send cloned request with header to the next handler.</span>
+    <span class="k">return</span> <span class="nx">next</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">authReq</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cloning a request and modifying the headers is such a common task that there is a shortcut function available for it:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Clone the request and set the new header in one step.</span>
+<span class="kr">const</span> <span class="nx">authReq</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">clone</span><span class="p">({</span> <span class="nx">setHeaders</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Authorization</span><span class="o">:</span> <span class="nx">authToken</span> <span class="p">}</span> <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../module_aliases.html" class="btn btn-neutral float-right" title="Module aliases" accesskey="n">Next →</a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral" title="HttpClient" accesskey="p">← Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE: 'true'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
+      <script type="text/javascript" src="../../_static/custom.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

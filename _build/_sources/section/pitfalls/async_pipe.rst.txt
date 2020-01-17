@@ -1,0 +1,23 @@
+Multiple HTTP requests with the async pipe
+==========================================
+If you used the async pipe binding in the HTML markup (**observable$ | async**), you may have noticed that multiple
+REST calls are made. The async pipe takes in an Observable object, most of the cases the result of an HttpClient
+function call (but not mandatory).
+
+|
+
+This is happening because each async pipe triggers a new HTTP request, as each **observable$ | async** creates a new
+subscription/stream to the Observable. This is not a bug, but the nature of how Observables are implemented to facilitate
+flexibility.
+
+|
+
+You can think of the **observable$** as a function declaration, and that each **observable$ | async** is calling the
+same function. The solution would be to use the share operator as well as template variables for the observable$ object.
+With share, each **observable$ | async** will use the same subscription, and only one HTTP request will be made.
+
+You can read more about this on the below links.
+
+    * `Angular pitfall: Multiple HTTP requests with RxJS and observable$ | async <https://blog.novanet.no/angular-pitfall-multiple-http-requests-with-rxjs-and-observable-async/>`_
+    *  `3 Common Rxjs Pitfalls that you might find while building Angular Applications <https://blog.angular-university.io/angular-2-rxjs-common-pitfalls/>`_
+

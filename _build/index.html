@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Angular Guideline &mdash; Angular Guideline 8 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/macadamian_theme.css" type="text/css" />
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="Angular Guideline 8 documentation" href="#"/>
+        <link rel="next" title="HttpClient" href="section/httpclient/overview.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Angular Guideline
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section/httpclient/overview.html">    HttpClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section/module_aliases.html">    Module aliases</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Common pitfalls</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section/pitfalls/async_pipe.html">    Async pipe</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Recommended libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="section/libraries/i18n.html">    I18n</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Angular Guideline</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Angular Guideline</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="angular-guideline">
+<h1>Angular Guideline<a class="headerlink" href="#angular-guideline" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this guide is to highlight some development practices and share useful libraries on Angular projects.
+The intention is to have as many people contribute with content so that interns or developers who just start working
+with this framework will have an easy starting point on their projects.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way of setting up a new Angular project is by using the <a class="reference external" href="https://angular.io/cli">Angular CLI</a> which
+generates a basic app skeleton.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In order to create a new project you should run the command <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">new</span> <span class="pre">&lt;app-name&gt;</span></code>. It provides interactive prompts
+for optional configuration, such as adding routing support. This will create a new folder with the app’s name which
+is a base Angular skeleton. After moving on the app’s root folder, the command <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">serve</span></code> will start a local server
+on a specific port as mentioned in the terminal output. When the compilation has finished, you are ready for
+development: navigate to the URL in your chosen browser and you should see some boilerplate content.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ng</span></code> tool has various useful commands for development: <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">lint</span></code>, <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">build</span></code>, <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">test</span></code>, <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">deploy</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">add</span></code> etc.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The most common command that you will use is <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span></code> or <code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">g</span></code> which helps you create any type of schema:
+module, component, directive, pipe, service, class, interface etc.
+Most of the schemas accept several common optional arguments. Some useful arguments are:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">--export=true|false</span></code> <em>(default: false)</em> when true, the declaring NgModule exports this component.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--module=module</span></code> can be used to specify the NgModule module the component should belong to. However, the
+component folder will be created in the current working directory where the command was executed.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--skipTests=true|false</span></code> <em>(default: false)</em> when true, does not create spec.ts test files.</p>
+</div></blockquote>
+<p>Check the online docs for the complete list of arguments for each schema.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="cli-usage-examples">
+<h2>CLI usage examples<a class="headerlink" href="#cli-usage-examples" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">g</span> <span class="pre">component</span> <span class="pre">&lt;name&gt;</span></code> this will generate in the current folder/module a new folder with the name of the component
+and the following files with the Angular naming convention:</p>
+<blockquote>
+<div><p><strong>&lt;name&gt;.component.html</strong></p>
+<p><strong>&lt;name&gt;.component.scss</strong></p>
+<p><strong>&lt;name&gt;.component.spec.ts</strong></p>
+<p><strong>&lt;name&gt;.component.ts</strong></p>
+</div></blockquote>
+<p>If the name of the component consists of more than one word, the convention is to use kebab casing in the command.
+The component name follows the Angular naming convention: <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;Component</span></code>; when the component name has more than
+one word, the cli will convert it from kebab to pascal case.</p>
+<p>The command will also add the newly created component in the current module where the command was executed under the
+declarations array on the modules ngModule definition. Some specific optional command arguments:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">--entryComponent=true|false</span></code> <em>(default: false)</em>  when true, the component is added to the entry components
+array of the declaring NgModule.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--selector=selector</span></code> the HTML selector to use for this component. If not specified it will default to the
+prefix defined in angular.json kebab cased with the name of the component.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">g</span> <span class="pre">directive</span> <span class="pre">&lt;name&gt;</span></code> will generate in the current folder/module a new file for the directive and the
+corresponding spec.js file (if the <code class="docutils literal notranslate"><span class="pre">--skipTests</span></code> argument hasn’t been used).</p>
+</div>
+<div class="section" id="recommended-resources">
+<h2>Recommended resources<a class="headerlink" href="#recommended-resources" title="Permalink to this headline">¶</a></h2>
+<p>For further learning you can checkout this LinkedIn learning path created by us
+<a class="reference external" href="https://www.linkedin.com/learning/paths/macadamian-front-end-development-web-angular-unverified">Front-End Development - Web - Angular</a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="section/httpclient/overview.html" class="btn btn-neutral float-right" title="HttpClient" accesskey="n">Next →</a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE: 'true'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+      <script type="text/javascript" src="_static/custom.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

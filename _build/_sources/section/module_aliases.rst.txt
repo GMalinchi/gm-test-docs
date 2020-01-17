@@ -1,0 +1,24 @@
+Module aliases
+==============
+
+The project created with the Angular CLI already includes the ``tsconfig.json`` file which allows to define absolute
+module paths instead of relative ones. Besides having the imports shorter and easier to read, the biggest advantage
+of using absolute paths is that the application will not break as we refactor and move files around.
+
+|
+
+Example of tsconfig (excerpt):
+
+.. code-block:: json
+
+    {
+        "compilerOptions": {
+            "baseUrl": "./src",
+            "paths": {
+                "@app/utils/*": ["app/utils/*"],
+                "@app/pipes/*": ["app/pipes/*"]
+            }
+        }
+    }
+
+

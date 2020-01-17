@@ -1,0 +1,109 @@
+*****************
+Angular Guideline
+*****************
+
+The purpose of this guide is to highlight some development practices and share useful libraries on Angular projects.
+The intention is to have as many people contribute with content so that interns or developers who just start working
+with this framework will have an easy starting point on their projects.
+
+Getting Started
+===============
+
+The easiest way of setting up a new Angular project is by using the `Angular CLI <https://angular.io/cli>`_ which
+generates a basic app skeleton.
+
+|
+
+In order to create a new project you should run the command ``ng new <app-name>``. It provides interactive prompts
+for optional configuration, such as adding routing support. This will create a new folder with the app’s name which
+is a base Angular skeleton. After moving on the app’s root folder, the command ``ng serve`` will start a local server
+on a specific port as mentioned in the terminal output. When the compilation has finished, you are ready for
+development: navigate to the URL in your chosen browser and you should see some boilerplate content.
+
+|
+
+The ``ng`` tool has various useful commands for development: ``ng lint``, ``ng build``, ``ng test``, ``ng deploy``,
+``ng add`` etc.
+
+|
+
+The most common command that you will use is ``ng generate`` or ``ng g`` which helps you create any type of schema:
+module, component, directive, pipe, service, class, interface etc.
+Most of the schemas accept several common optional arguments. Some useful arguments are:
+
+    ``--export=true|false`` *(default: false)* when true, the declaring NgModule exports this component.
+
+    ``--module=module`` can be used to specify the NgModule module the component should belong to. However, the
+    component folder will be created in the current working directory where the command was executed.
+
+    ``--skipTests=true|false`` *(default: false)* when true, does not create spec.ts test files.
+
+Check the online docs for the complete list of arguments for each schema.
+
+|
+
+CLI usage examples
+==================
+``ng g component <name>`` this will generate in the current folder/module a new folder with the name of the component
+and the following files with the Angular naming convention:
+
+    **<name>.component.html**
+
+    **<name>.component.scss**
+
+    **<name>.component.spec.ts**
+
+    **<name>.component.ts**
+
+If the name of the component consists of more than one word, the convention is to use kebab casing in the command.
+The component name follows the Angular naming convention: ``<name>Component``; when the component name has more than
+one word, the cli will convert it from kebab to pascal case.
+
+The command will also add the newly created component in the current module where the command was executed under the
+declarations array on the modules ngModule definition. Some specific optional command arguments:
+
+    ``--entryComponent=true|false`` *(default: false)*  when true, the component is added to the entry components
+    array of the declaring NgModule.
+
+    ``--selector=selector`` the HTML selector to use for this component. If not specified it will default to the
+    prefix defined in angular.json kebab cased with the name of the component.
+
+``ng g directive <name>`` will generate in the current folder/module a new file for the directive and the
+corresponding spec.js file (if the ``--skipTests`` argument hasn’t been used).
+
+Recommended resources
+=====================
+For further learning you can checkout this LinkedIn learning path created by us
+`Front-End Development - Web - Angular <https://www.linkedin.com/learning/paths/macadamian-front-end-development-web-angular-unverified>`_.
+
+
+.. toctree::
+    :hidden:
+
+    Getting Started <self>
+
+.. toctree::
+    :maxdepth: 4
+    :hidden:
+
+        HttpClient </section/httpclient/overview>
+
+.. toctree::
+    :maxdepth: 4
+    :hidden:
+
+        Module aliases </section/module_aliases>
+
+.. toctree::
+    :caption: Common pitfalls
+    :maxdepth: 4
+    :hidden:
+
+        Async pipe </section/pitfalls/async_pipe>
+
+.. toctree::
+    :caption: Recommended libraries
+    :maxdepth: 4
+    :hidden:
+
+        I18n </section/libraries/i18n>

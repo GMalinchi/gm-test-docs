@@ -1,0 +1,41 @@
+HttpClient
+==========
+
+Angular comes with its own service for making HTTP requests. The HttpClient in **@angular/common/http** offers a simplified client HTTP API for Angular applications that rests on the XMLHttpRequest interface exposed by browsers.
+
+Before you can use the HttpClient, you need to import the Angular HttpClientModule. Most apps do so in the root AppModule.
+
+|
+
+.. code-block:: typescript
+
+    import { HttpClientModule } from '@angular/common/http';
+
+    @NgModule({
+      imports: [
+        BrowserModule,
+        // Import HttpClientModule after BrowserModule.
+        HttpClientModule,
+      ],
+      declarations: [
+        AppComponent,
+      ],
+      bootstrap: [ AppComponent ]
+    })
+    export class AppModule {}
+
+Having imported HttpClientModule into the AppModule, you can inject the HttpClient into an application class, eg. a service.
+
+HttpClient exposes methods for HTTP calls such as: *get*, *post*, *delete*, *put*. These methods return an Observable object which means that the caller must **subscribe** to the method's return value in order to have the HTTP request executed.
+
+|
+
+.. note::
+    It is recommended to define specific service to hold the API interactions, instead of making the http calls directly in the component; this way, the components are easier to understand or test and the logic can be reused.
+
+
+.. toctree::
+    :hidden:
+    :maxdepth: 4
+
+        Interceptors </section/httpclient/interceptors>

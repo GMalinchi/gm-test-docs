@@ -1,0 +1,84 @@
+Http Interceptors
+=================
+
+The Angular HttpClient supports HTTP interception. You can define request or response interceptors, depending if
+you need:
+
+    * to inspect and transform HTTP requests from your application to the server
+    * to inspect and transform the server's responses on their way back to the application.
+
+The benefit of an interceptor is that it can perform route tasks in a standard way, thus eliminating the need of
+doing this explicitly for each request or response.
+
+|
+
+The most common use case of interceptors is for request authorizations: a request interceptor can be defined to add
+the authorization header with the corresponding authentication token. A response interceptor could be defined for
+error handling.
+
+|
+
+In Angular, an interceptor is creates as a class that implements the ``intercept()`` method of the ``HttpInterceptor``
+interface.
+
+|
+
+.. attention::
+    The Angular interceptors are services, so you must provide them in the same injector (or a parent injector) that
+    provides the HttpClient before the app can use them. As most of the applications provide the HttpClient n the app's
+    root injector, you should provide the interceptors in the ``AppModule`` as well.
+    |
+    As you may define multiple interceptors, consider defining a file that gathers all of them into an array.
+
+    .. code-block:: javascript
+
+        /* "Barrel" of Http Interceptors */
+        import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+        import { NoopInterceptor } from './noop-interceptor';
+
+        /* Http interceptor providers in outside-in order */
+        export const httpInterceptorProviders = [
+          { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
+        ];
+
+    Pay attention to the order of the interceptors: Angular will apply them in the order they are appear in the array.
+
+.. note::
+    The ``multi: true`` option tells Angular that ``HTTP_INTERCEPTORS`` is a token for a multiprovider that injects an array of values, rather than a single value.
+
+.. attention::
+    Request and response instances objects are *readonly*, therefore if the interceptors must mutate any of it,
+    you must clone it, modify and then pass the cloned object to ``next.handle()``.
+
+    .. code-block:: typescript
+
+        import { AuthService } from '../auth.service';
+
+        @Injectable()
+        export class AuthInterceptor implements HttpInterceptor {
+
+          constructor(private auth: AuthService) {}
+
+          intercept(req: HttpRequest<any>, next: HttpHandler) {
+            // Get the auth token from the service.
+            const authToken = this.auth.getAuthorizationToken();
+
+            // Clone the request and replace the original headers with
+            // cloned headers, updated with the authorization.
+            const authReq = req.clone({
+              headers: req.headers.set('Authorization', authToken)
+            });
+
+            // send cloned request with header to the next handler.
+            return next.handle(authReq);
+          }
+        }
+
+.. note::
+    Cloning a request and modifying the headers is such a common task that there is a shortcut function available for it:
+
+    .. code-block:: javascript
+
+        // Clone the request and set the new header in one step.
+        const authReq = req.clone({ setHeaders: { Authorization: authToken } });

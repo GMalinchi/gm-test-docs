@@ -1,0 +1,16 @@
+I18n
+====
+
+**ngx-translate** module can be used to add internationalization capabilities to the app.
+Features:
+
+    * Can be used as service, pipe or directive.
+    * Translation values interpolation.
+    * Nested JSON support for defining the translation files.
+    * Missing translation handling.
+    * Many plugins available to use with.
+    * `VSCode extension <https://marketplace.visualstudio.com/items?itemName=thiagocordeirooo.generate-translation>`_ to easily define translations without leaving the current file.
+    * HTML tags in translation strings.
+
+.. note::
+    It does not have pluralization or select features, but you can use the `MessageFormat compiler plugin <https://github.com/lephyrus/ngx-translate-messageformat-compiler>`_ with it.
